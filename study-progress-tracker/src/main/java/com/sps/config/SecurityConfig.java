@@ -30,26 +30,27 @@ public class SecurityConfig {
         .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
-    @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails user1= User
-                .withDefaultPasswordEncoder()
-                .username("zahid")
-                .password("1234")
-                .roles("USER")
-                .build();
-        UserDetails user2= User
-                .withDefaultPasswordEncoder()
-                .username("hibban")
-                .password("1234")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user1,user2);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails user1= User
+//                .withDefaultPasswordEncoder()
+//                .username("zahid")
+//                .password("1234")
+//                .roles("USER")
+//                .build();
+//        UserDetails user2= User
+//                .withDefaultPasswordEncoder()
+//                .username("hibban")
+//                .password("1234")
+//                .roles("USER")
+//                .build();
+//        return new InMemoryUserDetailsManager(user1,user2);
+//    }
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
         provider.setUserDetailsService(userDetailsService);
+        return provider;
     }
 }
