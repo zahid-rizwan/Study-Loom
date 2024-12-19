@@ -1,6 +1,8 @@
 package com.sps.controller;
 
 import com.sps.entity.User;
+import com.sps.model.JwtRequest;
+import com.sps.model.JwtResponse;
 import com.sps.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +28,12 @@ public class UserController {
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user){
-        System.out.println(user);
+    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest jwtRequest){
+        System.out.println(jwtRequest);
 //            return new ResponseEntity<>("success",HttpStatus.OK);
-        String token=userService.verify(user);
-        System.out.println("token:"+token);
-        return new ResponseEntity<>(token,HttpStatus.OK);
+        JwtResponse jwtResponse=userService.verify(jwtRequest);
+        System.out.println("token:"+jwtResponse.getJwtToken());
+        return new ResponseEntity<>(jwtResponse,HttpStatus.OK);
     }
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(){

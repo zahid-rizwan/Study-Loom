@@ -1,5 +1,6 @@
 package com.sps.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -53,7 +54,7 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

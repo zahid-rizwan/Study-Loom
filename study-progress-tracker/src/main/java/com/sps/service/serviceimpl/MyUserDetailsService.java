@@ -14,10 +14,10 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UserNotFoundException {
-        User user = userRepository.findByName(username);
+    public UserDetails loadUserByUsername(String email) throws UserNotFoundException {
+        User user = userRepository.findByEmail(email);
         if (user == null) {
-            throw new UserNotFoundException("User with username '" + username + "' not found.");
+            throw new UserNotFoundException("User with username '" + email + "' not found.");
         }
         return new UserPrincipal(user);
     }
