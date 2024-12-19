@@ -27,8 +27,11 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user){
+        System.out.println(user);
 //            return new ResponseEntity<>("success",HttpStatus.OK);
-        return new ResponseEntity<>(userService.verify(user),HttpStatus.OK);
+        String token=userService.verify(user);
+        System.out.println("token:"+token);
+        return new ResponseEntity<>(token,HttpStatus.OK);
     }
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(){
